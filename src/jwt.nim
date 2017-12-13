@@ -1,8 +1,8 @@
-import future, json, strutils, tables, times
+import future, json, strutils, tables, times, sequtils
 
-from private/hmac import nil
+from jwt/hmac import nil
 
-import private/claims, private/jose, private/utils
+import jwt/claims, jwt/jose, jwt/utils
 
 type
     InvalidToken* = object of Exception

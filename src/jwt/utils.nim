@@ -11,6 +11,11 @@ proc checkJsonNodeKind*(node: JsonNode, kind: JsonNodeKind) =
     if node.kind != kind:
         raise newException(ValueError, "Invalid kind")
 
+proc checkJsonNodeKind*(node: JsonNode, kinds: openArray[JsonNodeKind]) =
+  # Check that a given JsonNode has a given kind, raise InvalidClaim if not
+  if not kinds.contains(node.kind):
+    raise newException(ValueError, "Invalid kind")
+
 
 proc checkKeysExists*(node: JsonNode, keys: varargs[string]) =
     for key in keys:

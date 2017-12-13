@@ -1,6 +1,6 @@
 [Package]
 name          = "jwt"
-version       = "0.0.1"
+version       = "0.0.2"
 author        = "Endre Karlson"
 description   = "JSON Web Tokens for Nim"
 license       = "MIT"

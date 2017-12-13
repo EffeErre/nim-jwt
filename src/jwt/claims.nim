@@ -43,7 +43,7 @@ proc newSUB*(node: JsonNode): Claim =
 
 # AUD
 proc newAUD*(node: JsonNode): Claim =
-    checkJsonNodeKind(node, JArray)
+    checkJsonNodeKind(node, [JArray, JString])
     return newClaim(AUD, node)
 
 proc newAUD*(recipients: seq[string]): Claim =
@@ -52,7 +52,9 @@ proc newAUD*(recipients: seq[string]): Claim =
         node.add(%r)
     result = newAUD(node)
 
-proc newAUD*(recipient: string): Claim = return newAUD(@[recipient])
+proc newAUD*(recipient: string): Claim =
+  var node = newJString(recipient)
+  result = newAUD(node)
 
 proc newAUD*(recipients: varargs[string]): Claim = return newAUD(@recipients)
 
