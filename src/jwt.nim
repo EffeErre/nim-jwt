@@ -1,4 +1,4 @@
-import future, json, strutils, tables, times, sequtils
+import future, json, strutils, tables, times, sequtils, osproc
 
 from jwt/hmac import nil
 
@@ -88,6 +88,9 @@ proc sign*(token: var JWT, secret: var string) =
   assert token.signature == nil
   token.signature = signString(token.parsed, secret)
 
+# Sign a token with a RSA private key
+proc opensslSign*(token: var JWT, rsaKey: string) =
+  token.signature = execProcess("echo -n " & token.parsed & " | openssl dgst -binary -sha256 -sign " & rsaKey & " | openssl enc -base64 -A")
 
 # Verify a token typically an incoming request
 proc verify*(token: JWT, secret: var string): bool =

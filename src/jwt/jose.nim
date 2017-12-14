@@ -9,6 +9,7 @@ type
     SignatureAlgorithm* = enum
         NONE = "NONE"
         HS256 = "HS256"
+        RS256 = "RS256"
 
     JOSEHeader* = object
         alg*: SignatureAlgorithm
